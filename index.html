@@ -22,17 +22,27 @@
 
     <script>
         // 1. Create a variable to keep score and give it an initial value.
-    
+        let score = 0;
+
         // 2. Assign a variable to the firefly picture.
+        const firefly = document.querySelector('#firefly');
        
         // 3. Assign a variable to the score div.
-        
+        const scoreText = document.querySelector('#score');
 
         // 4. Hide the game over div.
-     
+        const gameOver = document.querySelector('#game-over');
+        
+
 
         /* 5. Write a function to increase the score when the firefly is clicked. 
         Add an event listener to the firefly and call the function on click. */
+        function scoreCounter() {
+            score = score +1;
+            scoreText.innerHTML = score;
+        }
+
+        firefly.addEventListener('click', scoreCounter);
 
       
 
@@ -42,13 +52,23 @@
         You will need to concatenate a string with Math.random() to generate the value for the style property.
         Assign a variable to your function so you can clear hte interval on game over.
         */
-      
-      
+
+        function moveFirefly() {
+            let leftPos='left:' + Math.random() * 1200 + 'px;';
+            let topPos='top:' + Math.random() * 600 + 'px';
+            firefly.style.cssText= leftPos + topPos;
+
+        }
+
+        let interval = setInterval(moveFirefly,1000);
 
         /* 7. Stop the animation and show game over after 1 minute */
+        function end (){
+            interval=clearInterval(interval);
+            gameOver.style.display= "block";
+        }
 
-      
-
+        setTimeout(end, 60000);
 
     </script>
 </body>
